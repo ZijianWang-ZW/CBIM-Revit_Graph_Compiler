@@ -501,6 +501,6 @@ def graph_construction(node_ns, csv_file_path, ttl_file_path, exact_geometry_fol
 
 node_ns = rdflib.Namespace('http://example.org/resources/arc/')
 csv_file_path = 'attribute_temp.csv'
-ttl_file_path = 'apt2.ttl'
+ttl_file_path = 'test.ttl'
 exact_geometry_folder_path = ".\exactgeometry"
 graph_construction(node_ns, csv_file_path, ttl_file_path, exact_geometry_folder_path)
