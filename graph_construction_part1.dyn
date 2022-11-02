@@ -393,7 +393,7 @@
     {
       "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
       "HintPath": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\Universal SE\\Selected Revit models\\Apt raw from dynamo",
-      "InputValue": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\CBIM-Revit Graph Compiler\\data",
+      "InputValue": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\CBIM-Revit Graph Compiler",
       "NodeType": "ExtensionNode",
       "Id": "2a8f03a50b3645da8b60872afd486d0c",
       "Inputs": [],
@@ -2491,13 +2491,13 @@
           "bc02ee4d850b4abfbdfedc7e0fe996bf"
         ],
         "Left": -1240.4688783279553,
-        "Top": 288.44733824194134,
-        "Width": 1174.7294432715571,
-        "Height": 280.56389981841255,
+        "Top": 288.24733824194135,
+        "Width": 1174.9294432715571,
+        "Height": 280.36389981841256,
         "FontSize": 36.0,
         "InitialTop": 341.44733824194134,
-        "InitialHeight": 279.56389981841266,
-        "TextblockHeight": 43.0,
+        "InitialHeight": 279.56389981841255,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2511,13 +2511,13 @@
           "e0872fff012e451aba3880b96e68c64f"
         ],
         "Left": -1082.7870720957796,
-        "Top": -452.12564707823554,
-        "Width": 1017.2484703076511,
-        "Height": 231.62761259537,
+        "Top": -452.52564707823558,
+        "Width": 1017.6484703076511,
+        "Height": 231.52075424271015,
         "FontSize": 36.0,
         "InitialTop": -356.12564707823554,
         "InitialHeight": 212.32075424271011,
-        "TextblockHeight": 86.0,
+        "TextblockHeight": 86.4,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2542,13 +2542,13 @@
           "4dae413f5fd84d6f84867718e03e96c1"
         ],
         "Left": 141.46341197760012,
-        "Top": -121.24183257848142,
-        "Width": 2450.1471459372751,
-        "Height": 1020.8554550737404,
+        "Top": -121.44183257848142,
+        "Width": 2451.1471459372751,
+        "Height": 1018.8554550737404,
         "FontSize": 36.0,
         "InitialTop": -68.241832578481421,
         "InitialHeight": 1018.8554550737404,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2570,13 +2570,13 @@
           "ede1bd6123004d18a3606f5c646d997f"
         ],
         "Left": 148.46638811703156,
-        "Top": -752.23583981526929,
-        "Width": 2122.8204762419673,
-        "Height": 530.55544758959263,
+        "Top": -752.43583981526933,
+        "Width": 2123.2204762419678,
+        "Height": 531.35544758959259,
         "FontSize": 36.0,
         "InitialTop": -699.23583981526929,
         "InitialHeight": 524.8447950159125,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2589,13 +2589,13 @@
           "5fe161477254491ca2fb15d599f4c53f"
         ],
         "Left": 371.1843608566287,
-        "Top": 1069.3844898961734,
-        "Width": 1571.8551187880739,
-        "Height": 293.91928504621887,
+        "Top": 1069.1844898961733,
+        "Width": 1572.255118788074,
+        "Height": 293.71928504621883,
         "FontSize": 36.0,
         "InitialTop": 1122.3844898961734,
-        "InitialHeight": 282.47228041637482,
-        "TextblockHeight": 43.0,
+        "InitialHeight": 292.91928504621887,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2607,8 +2607,8 @@
         ],
         "Left": 3187.4854502512194,
         "Top": -292.79365377691238,
-        "Width": 399.89471694646818,
-        "Height": 667.86813870929348,
+        "Width": 400.29471694646827,
+        "Height": 667.66813870929354,
         "FontSize": 36.0,
         "InitialTop": 149.20634622308762,
         "InitialHeight": 214.86813870929348,
@@ -2622,18 +2622,18 @@
           "2a8f03a50b3645da8b60872afd486d0c"
         ],
         "Left": 2736.7019111720838,
-        "Top": 495.74668427043378,
-        "Width": 305.0,
-        "Height": 234.0,
+        "Top": 539.3466842704338,
+        "Width": 395.19999999999982,
+        "Height": 189.79999999999995,
         "FontSize": 36.0,
         "InitialTop": 635.74668427043378,
-        "InitialHeight": 124.0,
-        "TextblockHeight": 130.0,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 86.4,
         "Background": "#FFFF7BAC"
       }
     ],
-    "X": 268.78828387042921,
-    "Y": 371.33735836806767,
-    "Zoom": 0.3447626926100944
+    "X": 153.787084516864,
+    "Y": 326.72245589351144,
+    "Zoom": 0.2508333082652387
   }
 }
