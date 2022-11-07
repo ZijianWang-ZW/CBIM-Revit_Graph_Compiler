@@ -392,8 +392,8 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
-      "HintPath": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\Universal SE\\Selected Revit models\\Apt raw from dynamo",
-      "InputValue": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\CBIM-Revit Graph Compiler",
+      "HintPath": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\zhiqi",
+      "InputValue": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\zhiqi",
       "NodeType": "ExtensionNode",
       "Id": "2a8f03a50b3645da8b60872afd486d0c",
       "Inputs": [],
@@ -603,7 +603,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# load extral libraries \r\nsys.path.append(r\"C:\\Users\\Zijian Wang\\.conda\\envs\\dynamo\\Lib\\site-packages\")\r\n\r\nimport ctypes  \r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN # parameter returns a list \r\n\r\nloc_ls = [] # create a list for storing locations\r\n\r\n\r\n\r\nfor each in IN[0]:\r\n\r\n    \r\n    loc_temp = {}\r\n    \r\n    if str(each) == 'None':\r\n        \r\n        loc_ls.append(loc_temp) # add none if the place is empty\r\n        \r\n    elif str(type(each)) == \"<class 'Autodesk.DesignScript.Geometry.Point'>\":\r\n        \r\n\r\n        loc_temp['point'] = [each.X, each.Y, each.Z]\r\n        loc_ls.append(loc_temp)\r\n        \r\n    elif str(type(each)) == \"<class 'Autodesk.DesignScript.Geometry.Line'>\":\r\n        \r\n        sp = each.StartPoint # get the start point by using its default function\r\n        loc_temp['startpoint'] = [sp.X, sp.Y, sp.Z]\r\n        \r\n        ep = each.EndPoint # get the end point by using its default function\r\n        loc_temp['endpoint'] = [ep.X, ep.Y, ep.Z]\r\n        \r\n        dir = each.Direction\r\n        loc_temp['direction'] = [dir.X, dir.Y, dir.Z]\r\n        \r\n        loc_temp['length'] = each.Length\r\n        \r\n        loc_ls.append(loc_temp)\r\n    \r\n    \r\n    elif str(type(each)) == \"<class 'Autodesk.DesignScript.Geometry.Arc'>\": \r\n        \r\n        nm = each.Normal\r\n        loc_temp['Normal'] = [nm.X, nm.Y, nm.Z, nm.Length]\r\n        \r\n        cp = each.CenterPoint\r\n        loc_temp['CenterPoint'] = [cp.X, cp.Y, cp.Z]\r\n        \r\n        loc_temp['Radius'] = [each.Radius]\r\n        \r\n        loc_temp['StartAngle'] = [each.StartAngle]\r\n        \r\n        loc_temp['SweepAngle'] = [each.SweepAngle]\r\n        \r\n        loc_ls.append(loc_temp)\r\n        \r\n    \r\n    \r\n    else:\r\n        ctypes.windll.user32.MessageBoxW(0, \"Unknown data type in Process Locations function \", \"Warming\", 1)\r\n  \r\nOUT = loc_ls",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nimport ctypes  \r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN # parameter returns a list \r\n\r\nloc_ls = [] # create a list for storing locations\r\n\r\n\r\n\r\nfor each in IN[0]:\r\n\r\n    \r\n    loc_temp = {}\r\n    \r\n    if str(each) == 'None':\r\n        \r\n        loc_ls.append(loc_temp) # add none if the place is empty\r\n        \r\n    elif str(type(each)) == \"<class 'Autodesk.DesignScript.Geometry.Point'>\":\r\n        \r\n\r\n        loc_temp['point'] = [each.X, each.Y, each.Z]\r\n        loc_ls.append(loc_temp)\r\n        \r\n    elif str(type(each)) == \"<class 'Autodesk.DesignScript.Geometry.Line'>\":\r\n        \r\n        sp = each.StartPoint # get the start point by using its default function\r\n        loc_temp['startpoint'] = [sp.X, sp.Y, sp.Z]\r\n        \r\n        ep = each.EndPoint # get the end point by using its default function\r\n        loc_temp['endpoint'] = [ep.X, ep.Y, ep.Z]\r\n        \r\n        dir = each.Direction\r\n        loc_temp['direction'] = [dir.X, dir.Y, dir.Z]\r\n        \r\n        loc_temp['length'] = each.Length\r\n        \r\n        loc_ls.append(loc_temp)\r\n    \r\n    \r\n    elif str(type(each)) == \"<class 'Autodesk.DesignScript.Geometry.Arc'>\": \r\n        \r\n        nm = each.Normal\r\n        loc_temp['Normal'] = [nm.X, nm.Y, nm.Z, nm.Length]\r\n        \r\n        cp = each.CenterPoint\r\n        loc_temp['CenterPoint'] = [cp.X, cp.Y, cp.Z]\r\n        \r\n        loc_temp['Radius'] = [each.Radius]\r\n        \r\n        loc_temp['StartAngle'] = [each.StartAngle]\r\n        \r\n        loc_temp['SweepAngle'] = [each.SweepAngle]\r\n        \r\n        loc_ls.append(loc_temp)\r\n        \r\n    \r\n    \r\n    else:\r\n        ctypes.windll.user32.MessageBoxW(0, \"Unknown data type in Process Locations function \", \"Warming\", 1)\r\n  \r\nOUT = loc_ls",
       "Engine": "CPython3",
       "VariableInputPorts": true,
       "Id": "f66e65f343ba45fdb5c276b10248f3a2",
@@ -1133,7 +1133,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n\r\nsys.path.append(r\"C:\\Users\\Zijian Wang\\.conda\\envs\\dynamo\\Lib\\site-packages\")\r\n\r\nimport ctypes  # An included library with Python install.  \r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\n# Place your code below this line\r\nuniqeid_ls =  IN[0]\r\nid_ls = IN[1]\r\nparameters_ls = IN[2]\r\nloc_ls = IN[3]\r\n\r\nall_ele_para = [] # create a dictionary for storing all parameters for all elements\r\n\r\n\r\n \r\n# judge whether the same lenght\r\nif len(uniqeid_ls) == len(id_ls)  == len(parameters_ls) == len(loc_ls): # == len(bbx_ls)\r\n    \r\n    # merge\r\n    for i in range(len(uniqeid_ls)):\r\n    \r\n        \r\n        each_ele_para = {**uniqeid_ls[i], **id_ls[i], **parameters_ls[i], **loc_ls[i]} #**bbx_ls[i], \r\n    \r\n        all_ele_para.append(each_ele_para)\r\n\r\n    OUT = all_ele_para\r\n    \r\nelse:\r\n    OUT = \"WRONG! NOT SAME LENGTH\"\r\n    ctypes.windll.user32.MessageBoxW(0, \"Problem: attribute length cannot match, file not save\", \"Wraming\", 1)\r\n\r\n    \r\n\r\n# Assign your output to the OUT variable.",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nimport ctypes  # An included library with Python install.  \r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\n# Place your code below this line\r\nuniqeid_ls =  IN[0]\r\nid_ls = IN[1]\r\nparameters_ls = IN[2]\r\nloc_ls = IN[3]\r\n\r\nall_ele_para = [] # create a dictionary for storing all parameters for all elements\r\n\r\n\r\n \r\n# judge whether the same lenght\r\nif len(uniqeid_ls) == len(id_ls)  == len(parameters_ls) == len(loc_ls): # == len(bbx_ls)\r\n    \r\n    # merge\r\n    for i in range(len(uniqeid_ls)):\r\n    \r\n        \r\n        each_ele_para = {**uniqeid_ls[i], **id_ls[i], **parameters_ls[i], **loc_ls[i]} #**bbx_ls[i], \r\n    \r\n        all_ele_para.append(each_ele_para)\r\n\r\n    OUT = all_ele_para\r\n    \r\nelse:\r\n    OUT = \"WRONG! NOT SAME LENGTH\"\r\n    ctypes.windll.user32.MessageBoxW(0, \"Problem: attribute length cannot match, file not save\", \"Wraming\", 1)\r\n\r\n    \r\n\r\n# Assign your output to the OUT variable.",
       "Engine": "CPython3",
       "VariableInputPorts": true,
       "Id": "4dae413f5fd84d6f84867718e03e96c1",
@@ -1338,7 +1338,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nimport csv\r\n\r\n# load extral libraries \r\nsys.path.append(r\"C:\\Users\\Zijian Wang\\.conda\\envs\\dynamo\\Lib\\site-packages\")\r\nimport os \r\nimport ctypes  \r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN # parameter returns a list\r\n\r\n#IN[0] is the para_dic\r\n#IN[1] is the loc_dic\r\n\r\ndir_path = IN[0]\r\n\r\nuniqeid_ls = IN[1]\r\n\r\nmesh_ls = IN[2]\r\n\r\nply_path_list = []\r\n\r\n\r\nif len(uniqeid_ls) == len(mesh_ls):\r\n\r\n    for i in range(len(uniqeid_ls)):\r\n    \r\n        if str(mesh_ls[i]) == 'None':\r\n        \r\n            filepath = os.sep.join([dir_path, \"exactgeometry\", \"empty.ply\"])\r\n            ply_path_list.append(filepath)\r\n            \r\n        else:\r\n            \r\n            uniqueid = uniqeid_ls[i]['UniqueId']\r\n            filepath = os.sep.join([dir_path, \"exactgeometry\", str(uniqueid)+\".ply\"])\r\n            ply_path_list.append(filepath)\r\n\r\nelse: \r\n    ctypes.windll.user32.MessageBoxW(0, \"Not same length for exact geometry\", \"Warming\", 1)\r\n\r\n\r\n\r\nOUT = ply_path_list",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nimport csv\r\n\r\nimport os \r\nimport ctypes  \r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN # parameter returns a list\r\n\r\n#IN[0] is the para_dic\r\n#IN[1] is the loc_dic\r\n\r\ndir_path = IN[0]\r\n\r\nuniqeid_ls = IN[1]\r\n\r\nmesh_ls = IN[2]\r\n\r\nply_path_list = []\r\n\r\n\r\nif len(uniqeid_ls) == len(mesh_ls):\r\n\r\n    for i in range(len(uniqeid_ls)):\r\n    \r\n        if str(mesh_ls[i]) == 'None':\r\n        \r\n            filepath = os.sep.join([dir_path, \"exactgeometry\", \"empty.ply\"])\r\n            ply_path_list.append(filepath)\r\n            \r\n        else:\r\n            \r\n            uniqueid = uniqeid_ls[i]['UniqueId']\r\n            filepath = os.sep.join([dir_path, \"exactgeometry\", str(uniqueid)+\".ply\"])\r\n            ply_path_list.append(filepath)\r\n\r\nelse: \r\n    ctypes.windll.user32.MessageBoxW(0, \"Not same length for exact geometry\", \"Warming\", 1)\r\n\r\n\r\n\r\nOUT = ply_path_list",
       "Engine": "CPython3",
       "VariableInputPorts": true,
       "Id": "d177ade16d8a45a7ad565cf4bfa4fce9",
@@ -1447,7 +1447,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nsys.path.append(r\"C:\\Users\\Zijian Wang\\.conda\\envs\\dynamo\\Lib\\site-packages\")\r\nimport os \r\nimport shutil\r\nimport time\r\nimport csv\r\nimport ctypes  \r\n\r\n########## the following function is used for comparing \r\ndef readcsv(csv_path):\r\n# this function is to read csv files back to a list containing element attributes dictionary\r\n\r\n    with open(csv_path) as csv_file:\r\n        csv_reader = csv.reader(csv_file, delimiter=',')\r\n        dict_list = []\r\n\r\n        att_dict_temp = {}\r\n\r\n        for row in csv_reader:\r\n\r\n            if str(row) == \"['==========']\":\r\n                # append an element's attribute to the list when it is not empty\r\n                if att_dict_temp:\r\n                    dict_list.append(att_dict_temp)\r\n                # reset as empty for the next attribute\r\n                att_dict_temp = {}\r\n\r\n            else:\r\n                key = row[0].strip().replace(\" \", \"\") #move heading, tailing, between spaces\r\n\r\n                if len(row) >= 1  and  len(row) <=3:\r\n                    \r\n                    value = row[1].strip().replace(\" \", \"\") \r\n\r\n                elif len(row) >3 :\r\n                    \r\n                    value = row[1].split(\"[\")[-1] + \",\" +  row[2] + \",\" + row[3].split(\"]\")[0]  \r\n\r\n                else:\r\n                    value = \"\"\r\n\r\n                att_dict_temp[key]=value #put it as an element in the dictionary\r\n\r\n    return dict_list\r\n\r\ndef uniqueIdList(att_list):\r\n    list_id = []\r\n\r\n    for each in att_list:\r\n        if each['UniqueId']:\r\n            list_id.append(each['UniqueId'])\r\n        else:\r\n            print(\"Wrong! This element has no UniqueId\")\r\n\r\n    return list_id\r\n\r\ndef dict_compare(d1, d2):\r\n    d1_keys = set(d1.keys())\r\n    d2_keys = set(d2.keys())\r\n    shared_keys = d1_keys.intersection(d2_keys)\r\n    added = d1_keys - d2_keys\r\n    removed = d2_keys - d1_keys\r\n    modified = {o : (d1[o], d2[o]) for o in shared_keys if d1[o] != d2[o]}\r\n    same = set(o for o in shared_keys if d1[o] == d2[o])\r\n    return added, removed, modified, same\r\n\r\ndef list_compare(list_new, list_old, list_old_id):\r\n\r\n    ls_added_obj = []\r\n    ls_del_obj = []\r\n    ls_com_obj = []\r\n    ls_change = []\r\n    ls_change_id = []\r\n\r\n    # each is a dictionary contains a new BIM object's all attributes \r\n    for each in list_new:\r\n\r\n        element_id = each['UniqueId']\r\n\r\n        # try to find out all changed parameters\r\n        if element_id in list_old_id:\r\n            \r\n            # find the place of the id in id_list, come back to attribute list and return the attribute\r\n            # each_old is a attribute dictionary containing an old BIM object's all attributes\r\n            each_old = list_old[list_old_id.index(element_id)] \r\n\r\n            added, removed, modified, same= dict_compare(each, each_old)\r\n\r\n            # print(modified)\r\n\r\n            # removed is a dictionary\r\n            if modified:\r\n                modified['UniqueId'] = element_id\r\n                ls_change.append(modified)\r\n\r\n                ls_change_id.append(element_id)\r\n            \r\n            # if added:\r\n            #     # TD \r\n            #     ls_change.append(added)\r\n                \r\n            # if removed:\r\n            #     # TD  \r\n            #     ls_change.append(removed)\r\n        \r\n            # record the list, the BIM element exist in both lists\r\n            ls_com_obj.append(element_id)\r\n\r\n        else:\r\n            ls_added_obj.append(each) # if element is not in previous, it is an added element\r\n\r\n    print(ls_com_obj)\r\n    # delete existing elements, based on ls_com_obj stored in previous\r\n\r\n\r\n    ls_del_obj = list_old_id\r\n\r\n    for each in ls_com_obj:\r\n\r\n        ls_del_obj.remove(each)\r\n \r\n\r\n    return ls_added_obj, ls_del_obj, ls_change, ls_change_id\r\n\r\n\r\n\r\n####################  Input ##############################\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\nall_ele_para = IN[0]\r\neg_list = IN[1]\r\noriginal_file_path = IN[2]\r\n\r\nsend_list = []\r\n\r\n\r\ntemp_file_path = os.path.join(original_file_path, \"attribute_temp.csv\")\r\n\r\n\r\n##### when there are no files, it means that the model is not initialized yet.\r\n#### we are trying to save all parameters, and all exact geometry\r\nif not os.path.exists(temp_file_path):\r\n    \r\n    # create this file and write the attribute dictionary into the file\r\n    with open(temp_file_path, 'w') as f:\r\n        f.write(\"==========\\n\") # add seperators bewteen elements    \r\n        # here is to write all parameters of one element\r\n        for each in all_ele_para:\r\n            for key in each.keys():\r\n                f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n            f.write(\"==========\\n\") # add seperators bewteen elements\r\n        f.close()\r\n    \r\n    # create the name of the file with date\r\n    timestr = time.strftime(\"%Y%m%d_%H%M%S\") # time stamp\r\n    backup_file_path = os.path.join(IN[2], timestr+\".csv\")\r\n    # copy the temp file to the data file for backup\r\n    shutil.copy(temp_file_path, backup_file_path) \r\n    \r\n    send_list.append(temp_file_path)\r\n    \r\n    # append each exact geometry to the list\r\n    for each in eg_list:\r\n        if str(each) != \"None\":\r\n            send_list.append(each)\r\n            \r\n\r\n    # for test, we use send_list\r\n    # OUT = send_list\r\n    \r\n##### when there exsit files, it means that the model has been initialized\r\n#### we only save changed paramters and their corresponding exact geometry \r\nelse:\r\n    \r\n    ## read the old attribute\r\n    old_all_ele_para = readcsv(temp_file_path)\r\n    \r\n    ## write the new attributes to csv\r\n    timestr = time.strftime(\"%Y%m%d_%H%M%S\") # time stamp\r\n    new_file_path = os.path.join(IN[2], timestr+\".csv\")\r\n    # create this file and write the attribute dictionary into the file\r\n    with open(new_file_path, 'w') as f:\r\n        f.write(\"==========\\n\") # add seperators bewteen elements    \r\n        # here is to write all parameters of one element\r\n        for each in all_ele_para:\r\n            for key in each.keys():\r\n                f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n            f.write(\"==========\\n\") # add seperators bewteen elements\r\n        f.close()\r\n    # copy the file and rename as temp\r\n    shutil.copy(new_file_path, temp_file_path) \r\n    \r\n    ## read the new attribute\r\n    new_all_ele_para = readcsv(new_file_path)\r\n\r\n\r\n    ## find out the difference between the two dictionary\r\n    list_old_id = uniqueIdList(old_all_ele_para)\r\n    \r\n    ls_added_obj, ls_del_obj, list_change, list_change_id = list_compare(new_all_ele_para, old_all_ele_para, list_old_id)\r\n    \r\n    ## save the modified parameter as a new csv  file: \r\n    if list_change:\r\n        mod_path = os.path.join(original_file_path, \"modification.csv\")\r\n        with open(mod_path , 'w') as f:\r\n            f.write(\"==========\\n\") # add seperators bewteen elements    \r\n            # here is to write all parameters of one element\r\n            for each in list_change:\r\n                for key in each.keys():\r\n                    f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n                f.write(\"==========\\n\") # add seperators bewteen elements\r\n            f.close()\r\n        send_list.append(mod_path)\r\n\r\n    ## save the addition as a new csv  file: \r\n    if ls_added_obj:\r\n        add_path = os.path.join(original_file_path, \"addition.csv\")\r\n        with open(add_path , 'w') as f:\r\n            f.write(\"==========\\n\") # add seperators bewteen elements    \r\n            # here is to write all parameters of one element\r\n            for each in ls_added_obj:\r\n                for key in each.keys():\r\n                    f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n                f.write(\"==========\\n\") # add seperators bewteen elements\r\n            f.close()\r\n        send_list.append(add_path)\r\n\r\n    ## save the deletion as a new csv file: \r\n    if ls_del_obj:\r\n        del_path = os.path.join(original_file_path, \"deletion.csv\")\r\n        with open(del_path , 'w') as f:\r\n            for each in ls_del_obj:\r\n                f.write(each) \r\n                f.write(\"\\n\")\r\n            f.close()\r\n        send_list.append(del_path)\r\n\r\n    \r\n\r\n\r\n    \r\n    for i in list_change_id:\r\n        \r\n        temp = os.path.join(original_file_path, \"exactgeometry/\"+i+\".ply\")\r\n        \r\n        send_list.append(temp)\r\n \r\nOUT = send_list\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nimport os \r\nimport shutil\r\nimport time\r\nimport csv\r\nimport ctypes  \r\n\r\n########## the following function is used for comparing \r\ndef readcsv(csv_path):\r\n# this function is to read csv files back to a list containing element attributes dictionary\r\n\r\n    with open(csv_path) as csv_file:\r\n        csv_reader = csv.reader(csv_file, delimiter=',')\r\n        dict_list = []\r\n\r\n        att_dict_temp = {}\r\n\r\n        for row in csv_reader:\r\n\r\n            if str(row) == \"['==========']\":\r\n                # append an element's attribute to the list when it is not empty\r\n                if att_dict_temp:\r\n                    dict_list.append(att_dict_temp)\r\n                # reset as empty for the next attribute\r\n                att_dict_temp = {}\r\n\r\n            else:\r\n                key = row[0].strip().replace(\" \", \"\") #move heading, tailing, between spaces\r\n\r\n                if len(row) >= 1  and  len(row) <=3:\r\n                    \r\n                    value = row[1].strip().replace(\" \", \"\") \r\n\r\n                elif len(row) >3 :\r\n                    \r\n                    value = row[1].split(\"[\")[-1] + \",\" +  row[2] + \",\" + row[3].split(\"]\")[0]  \r\n\r\n                else:\r\n                    value = \"\"\r\n\r\n                att_dict_temp[key]=value #put it as an element in the dictionary\r\n\r\n    return dict_list\r\n\r\ndef uniqueIdList(att_list):\r\n    list_id = []\r\n\r\n    for each in att_list:\r\n        if each['UniqueId']:\r\n            list_id.append(each['UniqueId'])\r\n        else:\r\n            print(\"Wrong! This element has no UniqueId\")\r\n\r\n    return list_id\r\n\r\ndef dict_compare(d1, d2):\r\n    d1_keys = set(d1.keys())\r\n    d2_keys = set(d2.keys())\r\n    shared_keys = d1_keys.intersection(d2_keys)\r\n    added = d1_keys - d2_keys\r\n    removed = d2_keys - d1_keys\r\n    modified = {o : (d1[o], d2[o]) for o in shared_keys if d1[o] != d2[o]}\r\n    same = set(o for o in shared_keys if d1[o] == d2[o])\r\n    return added, removed, modified, same\r\n\r\ndef list_compare(list_new, list_old, list_old_id):\r\n\r\n    ls_added_obj = []\r\n    ls_del_obj = []\r\n    ls_com_obj = []\r\n    ls_change = []\r\n    ls_change_id = []\r\n\r\n    # each is a dictionary contains a new BIM object's all attributes \r\n    for each in list_new:\r\n\r\n        element_id = each['UniqueId']\r\n\r\n        # try to find out all changed parameters\r\n        if element_id in list_old_id:\r\n            \r\n            # find the place of the id in id_list, come back to attribute list and return the attribute\r\n            # each_old is a attribute dictionary containing an old BIM object's all attributes\r\n            each_old = list_old[list_old_id.index(element_id)] \r\n\r\n            added, removed, modified, same= dict_compare(each, each_old)\r\n\r\n            # print(modified)\r\n\r\n            # removed is a dictionary\r\n            if modified:\r\n                modified['UniqueId'] = element_id\r\n                ls_change.append(modified)\r\n\r\n                ls_change_id.append(element_id)\r\n            \r\n            # if added:\r\n            #     # TD \r\n            #     ls_change.append(added)\r\n                \r\n            # if removed:\r\n            #     # TD  \r\n            #     ls_change.append(removed)\r\n        \r\n            # record the list, the BIM element exist in both lists\r\n            ls_com_obj.append(element_id)\r\n\r\n        else:\r\n            ls_added_obj.append(each) # if element is not in previous, it is an added element\r\n\r\n    print(ls_com_obj)\r\n    # delete existing elements, based on ls_com_obj stored in previous\r\n\r\n\r\n    ls_del_obj = list_old_id\r\n\r\n    for each in ls_com_obj:\r\n\r\n        ls_del_obj.remove(each)\r\n \r\n\r\n    return ls_added_obj, ls_del_obj, ls_change, ls_change_id\r\n\r\n\r\n\r\n####################  Input ##############################\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\nall_ele_para = IN[0]\r\neg_list = IN[1]\r\noriginal_file_path = IN[2]\r\n\r\nsend_list = []\r\n\r\n\r\ntemp_file_path = os.path.join(original_file_path, \"attribute_temp.csv\")\r\n\r\n\r\n##### when there are no files, it means that the model is not initialized yet.\r\n#### we are trying to save all parameters, and all exact geometry\r\nif not os.path.exists(temp_file_path):\r\n    \r\n    # create this file and write the attribute dictionary into the file\r\n    with open(temp_file_path, 'w') as f:\r\n        f.write(\"==========\\n\") # add seperators bewteen elements    \r\n        # here is to write all parameters of one element\r\n        for each in all_ele_para:\r\n            for key in each.keys():\r\n                f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n            f.write(\"==========\\n\") # add seperators bewteen elements\r\n        f.close()\r\n    \r\n    # create the name of the file with date\r\n    timestr = time.strftime(\"%Y%m%d_%H%M%S\") # time stamp\r\n    backup_file_path = os.path.join(IN[2], timestr+\".csv\")\r\n    # copy the temp file to the data file for backup\r\n    shutil.copy(temp_file_path, backup_file_path) \r\n    \r\n    send_list.append(temp_file_path)\r\n    \r\n    # append each exact geometry to the list\r\n    for each in eg_list:\r\n        if str(each) != \"None\":\r\n            send_list.append(each)\r\n            \r\n\r\n    # for test, we use send_list\r\n    # OUT = send_list\r\n    \r\n##### when there exsit files, it means that the model has been initialized\r\n#### we only save changed paramters and their corresponding exact geometry \r\nelse:\r\n    \r\n    ## read the old attribute\r\n    old_all_ele_para = readcsv(temp_file_path)\r\n    \r\n    ## write the new attributes to csv\r\n    timestr = time.strftime(\"%Y%m%d_%H%M%S\") # time stamp\r\n    new_file_path = os.path.join(IN[2], timestr+\".csv\")\r\n    # create this file and write the attribute dictionary into the file\r\n    with open(new_file_path, 'w') as f:\r\n        f.write(\"==========\\n\") # add seperators bewteen elements    \r\n        # here is to write all parameters of one element\r\n        for each in all_ele_para:\r\n            for key in each.keys():\r\n                f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n            f.write(\"==========\\n\") # add seperators bewteen elements\r\n        f.close()\r\n    # copy the file and rename as temp\r\n    shutil.copy(new_file_path, temp_file_path) \r\n    \r\n    ## read the new attribute\r\n    new_all_ele_para = readcsv(new_file_path)\r\n\r\n\r\n    ## find out the difference between the two dictionary\r\n    list_old_id = uniqueIdList(old_all_ele_para)\r\n    \r\n    ls_added_obj, ls_del_obj, list_change, list_change_id = list_compare(new_all_ele_para, old_all_ele_para, list_old_id)\r\n    \r\n    ## save the modified parameter as a new csv  file: \r\n    if list_change:\r\n        mod_path = os.path.join(original_file_path, \"modification.csv\")\r\n        with open(mod_path , 'w') as f:\r\n            f.write(\"==========\\n\") # add seperators bewteen elements    \r\n            # here is to write all parameters of one element\r\n            for each in list_change:\r\n                for key in each.keys():\r\n                    f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n                f.write(\"==========\\n\") # add seperators bewteen elements\r\n            f.close()\r\n        send_list.append(mod_path)\r\n\r\n    ## save the addition as a new csv  file: \r\n    if ls_added_obj:\r\n        add_path = os.path.join(original_file_path, \"addition.csv\")\r\n        with open(add_path , 'w') as f:\r\n            f.write(\"==========\\n\") # add seperators bewteen elements    \r\n            # here is to write all parameters of one element\r\n            for each in ls_added_obj:\r\n                for key in each.keys():\r\n                    f.write(\"%s, %s\\n\" % (key, each[key]))    \r\n                f.write(\"==========\\n\") # add seperators bewteen elements\r\n            f.close()\r\n        send_list.append(add_path)\r\n\r\n    ## save the deletion as a new csv file: \r\n    if ls_del_obj:\r\n        del_path = os.path.join(original_file_path, \"deletion.csv\")\r\n        with open(del_path , 'w') as f:\r\n            for each in ls_del_obj:\r\n                f.write(each) \r\n                f.write(\"\\n\")\r\n            f.close()\r\n        send_list.append(del_path)\r\n\r\n    \r\n\r\n\r\n    \r\n    for i in list_change_id:\r\n        \r\n        temp = os.path.join(original_file_path, \"exactgeometry/\"+i+\".ply\")\r\n        \r\n        send_list.append(temp)\r\n \r\nOUT = send_list\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "Engine": "CPython3",
       "VariableInputPorts": true,
       "Id": "655e700f40b544439fa2f7057fa01485",
@@ -2116,8 +2116,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2746.7019111720838,
-        "Y": 635.74668427043378
+        "X": 2740.3514794125558,
+        "Y": 607.59603316880759
       },
       {
         "ShowGeometry": true,
@@ -2126,7 +2126,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 347.307490664208,
+        "X": 347.30749066420776,
         "Y": 311.84383859538809
       },
       {
@@ -2186,8 +2186,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1451.8033087249214,
-        "Y": 713.26374177674654
+        "X": 1452.991281748215,
+        "Y": 710.88779573015938
       },
       {
         "ShowGeometry": true,
@@ -2346,8 +2346,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2044.341599984175,
-        "Y": 805.61362249525894
+        "X": 2077.0283432327651,
+        "Y": 772.2598028538406
       },
       {
         "ShowGeometry": true,
@@ -2366,8 +2366,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1242.0439734107931,
-        "Y": -680.02269104823711
+        "X": 1154.8259347867804,
+        "Y": -688.19938216923845
       },
       {
         "ShowGeometry": true,
@@ -2416,8 +2416,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1855.0394796447026,
-        "Y": 1187.4567177306856
+        "X": 1891.0277317459004,
+        "Y": 1194.3775354424545
       },
       {
         "ShowGeometry": true,
@@ -2431,7 +2431,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "Create SendFile list",
+        "Name": "Save as files",
         "Id": "655e700f40b544439fa2f7057fa01485",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -2466,8 +2466,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2884.9289465510851,
-        "Y": 932.96079172186148
+        "X": 2719.3397169903656,
+        "Y": 842.24538019105
       },
       {
         "ShowGeometry": true,
@@ -2476,8 +2476,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1242.9833450722203,
-        "Y": 1216.6110200236637
+        "X": 1138.595187364165,
+        "Y": 1203.1415803193986
       }
     ],
     "Annotations": [
@@ -2491,13 +2491,13 @@
           "bc02ee4d850b4abfbdfedc7e0fe996bf"
         ],
         "Left": -1240.4688783279553,
-        "Top": 288.24733824194135,
-        "Width": 1174.9294432715571,
-        "Height": 280.36389981841256,
+        "Top": 288.44733824194134,
+        "Width": 1174.7294432715571,
+        "Height": 280.56389981841255,
         "FontSize": 36.0,
         "InitialTop": 341.44733824194134,
         "InitialHeight": 279.56389981841255,
-        "TextblockHeight": 43.2,
+        "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
       {
@@ -2511,13 +2511,13 @@
           "e0872fff012e451aba3880b96e68c64f"
         ],
         "Left": -1082.7870720957796,
-        "Top": -452.52564707823558,
-        "Width": 1017.6484703076511,
-        "Height": 231.52075424271015,
+        "Top": -452.12564707823554,
+        "Width": 1017.2484703076511,
+        "Height": 231.62761259537,
         "FontSize": 36.0,
         "InitialTop": -356.12564707823554,
         "InitialHeight": 212.32075424271011,
-        "TextblockHeight": 86.4,
+        "TextblockHeight": 86.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2542,13 +2542,13 @@
           "4dae413f5fd84d6f84867718e03e96c1"
         ],
         "Left": 141.46341197760012,
-        "Top": -121.44183257848142,
-        "Width": 2451.1471459372751,
-        "Height": 1018.8554550737404,
+        "Top": -121.24183257848142,
+        "Width": 2450.1471459372751,
+        "Height": 1271.501635432322,
         "FontSize": 36.0,
         "InitialTop": -68.241832578481421,
-        "InitialHeight": 1018.8554550737404,
-        "TextblockHeight": 43.2,
+        "InitialHeight": 985.501635432322,
+        "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
       {
@@ -2570,13 +2570,13 @@
           "ede1bd6123004d18a3606f5c646d997f"
         ],
         "Left": 148.46638811703156,
-        "Top": -752.43583981526933,
-        "Width": 2123.2204762419678,
-        "Height": 531.35544758959259,
+        "Top": -752.23583981526929,
+        "Width": 2122.8204762419673,
+        "Height": 541.8447950159125,
         "FontSize": 36.0,
         "InitialTop": -699.23583981526929,
         "InitialHeight": 524.8447950159125,
-        "TextblockHeight": 43.2,
+        "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
       {
@@ -2589,26 +2589,26 @@
           "5fe161477254491ca2fb15d599f4c53f"
         ],
         "Left": 371.1843608566287,
-        "Top": 1069.1844898961733,
-        "Width": 1572.255118788074,
-        "Height": 293.71928504621883,
+        "Top": 1069.3844898961734,
+        "Width": 1819.8433708892717,
+        "Height": 468.99304554628111,
         "FontSize": 36.0,
         "InitialTop": 1122.3844898961734,
         "InitialHeight": 292.91928504621887,
-        "TextblockHeight": 43.2,
+        "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
       {
         "Id": "7ef23b704ad041a98fbd04ab7928c39e",
-        "Title": "For initialization, it create the temp_attribute, and send all exact geometry.\r\n\r\nFor tracking change, it compare the file with the previous one, and find out changed parts save in csv.\r\n",
+        "Title": "For initialization, it create the temp_attribute, and save all exact geometry.\r\n\r\nFor tracking change, it compare the file with the previous one, and find out changed parts save in csv.\r\n",
         "Nodes": [
           "655e700f40b544439fa2f7057fa01485",
           "e24375254205466d84c2b8f01a727274"
         ],
         "Left": 3187.4854502512194,
         "Top": -292.79365377691238,
-        "Width": 400.29471694646827,
-        "Height": 667.66813870929354,
+        "Width": 399.89471694646818,
+        "Height": 667.86813870929348,
         "FontSize": 36.0,
         "InitialTop": 149.20634622308762,
         "InitialHeight": 214.86813870929348,
@@ -2621,19 +2621,19 @@
         "Nodes": [
           "2a8f03a50b3645da8b60872afd486d0c"
         ],
-        "Left": 2736.7019111720838,
-        "Top": 539.3466842704338,
-        "Width": 395.19999999999982,
-        "Height": 189.79999999999995,
+        "Left": 2730.3514794125558,
+        "Top": 424.59603316880759,
+        "Width": 268.0,
+        "Height": 277.0,
         "FontSize": 36.0,
-        "InitialTop": 635.74668427043378,
+        "InitialTop": 607.59603316880759,
         "InitialHeight": 145.0,
-        "TextblockHeight": 86.4,
+        "TextblockHeight": 173.0,
         "Background": "#FFFF7BAC"
       }
     ],
-    "X": 153.787084516864,
-    "Y": 326.72245589351144,
-    "Zoom": 0.2508333082652387
+    "X": 195.61556295203638,
+    "Y": 194.97588269190129,
+    "Zoom": 0.23164917953389122
   }
 }
