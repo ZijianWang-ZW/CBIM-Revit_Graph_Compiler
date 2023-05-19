@@ -1,2 +1,7 @@
 !*.png 
 envsetup.pdf
+*.ply
+*.rvt
+*.csv
+*.ttl
+exactgeometry/.a

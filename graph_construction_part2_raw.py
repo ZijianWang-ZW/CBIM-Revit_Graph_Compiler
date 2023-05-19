@@ -16,81 +16,10 @@ bot_ns = Namespace("https://w3id.org/bot#")
 revit_ns = Namespace("http://example.org/revitprops#")
 fog_ns = Namespace("https://w3id.org/fog#")
 
-#--------------------------------------------------------------------------#
-#   This function recalculate bounding box based on exact geometry 
-#   and add the exact geometry to the attribute dictionary
-#   
-#   We did not use the BBX from dynamo default function, as we found 
-#   it may cause errors in some cases
-#--------------------------------------------------------------------------#
-def AddBBX(dict_list, exact_geometry_folder_path):
-
-    # collect the unique id from received exact geometry
-    eg_list = glob.glob(exact_geometry_folder_path+os.sep+"*.ply")
-    # print(eg_list)
-
-    # each present the full path for the exact geometry
-    for each in eg_list:
-        
-        # calculate the minpoint & maxpoint
-        mesh = trimesh.load_mesh(each)
-        minpoint_xyz = mesh.bounds[0].tolist()
-        minpoint_xyz = (', '.join(str(each)for each in minpoint_xyz))
-
-        maxpoint_xyz = mesh.bounds[1].tolist()
-        maxpoint_xyz = (', '.join(str(each)for each in maxpoint_xyz))
 
 
-        bbx = minpoint_xyz + ", " + maxpoint_xyz
 
-        # got the uniqueid
-        file_uiqueid=os.path.basename(each).split(".ply")[0]
-
-        # wirte the max&min points into attribute list 
-        for one_element in dict_list:
-
-            if one_element['uniqueId'] == file_uiqueid:
-
-                one_element['bbx'] = bbx
-
-    return dict_list
-
-
-#--------------------------------------------------------------------------#
-#   This function is used to artifically add "BOT:Building" to graph
-#
-#   From exported data, there is no "Building". Only from "site" to "story"
-#   Therefore, we added it maunnually as long as there is a site. 
-# 
-#   Be carefully, the assumption is that each site only has one building.
-#   If more than one building, the results will be wrong. 
-#--------------------------------------------------------------------------#
-def AddBuilding(dict_list):
-
-    add = False 
-
-    # if there is a "Site", then we add a "Building"
-    for each in dict_list:
-        if each['category'] == 'Site':
-            add = True
-    
-    if add:
-        # create a uniqueid
-        uniqueid = uuid4()
-        # create a site dictionary
-        bud_dict = {
-            'category':'Building',
-            'uniqueId': str(uniqueid),
-            'id': None
-        }
-
-    # insert to the second position, following Site (usually)
-    dict_list.insert(1, bud_dict)
-
-    return dict_list
-
-
-#--------------------------------------------------------------------------#
+#-------------------------------------------------------------------------#
 #   This function read csv attribute return a list consisting of 
 #   element attribute dictionaries like in Dynamo 
 #--------------------------------------------------------------------------#
@@ -136,10 +65,10 @@ def ReadAttribute(csv_path, exact_geometry_folder_path):
 
 
     # add bounding box
-    dict_list = AddBBX(dict_list, exact_geometry_folder_path)
+    # dict_list = AddBBX(dict_list, exact_geometry_folder_path)
 
     # add "building" object mannually 
-    dict_list = AddBuilding(dict_list)
+    # dict_list = AddBuilding(dict_list)
 
     # delete HVAC zone (if you need, you can delete this for loop)
     for each in dict_list:
@@ -244,13 +173,16 @@ def CreatePerNode(g, one_element, node_namespace):
 
     # add each node for a type of bot elements
     if one_element["category"] == "Site":
-        g.add((ele_name, RDF.type, bot_ns.Site))
+        # g.add((ele_name, RDF.type, bot_ns.Site))
+        pass
     elif one_element["category"] == "Building":
-        g.add((ele_name, RDF.type, bot_ns.Building))
+        # g.add((ele_name, RDF.type, bot_ns.Building))
+        pass
     elif one_element["category"] == "Levels":
         g.add((ele_name, RDF.type, bot_ns.Storey))
     elif one_element["category"] == "HVACZones": # need to improve # we may make errors here
-        g.add((ele_name, RDF.type, bot_ns.Space))
+        # g.add((ele_name, RDF.type, bot_ns.Space))
+        pass
     else:
         g.add((ele_name, RDF.type, bot_ns.Element))
 
@@ -274,7 +206,8 @@ def Link2Elemts(g, category1, guid1, category2, guid2, link, node_namespace, lin
 
 
 #--------------------------------------------------------------------------#
-#   This function 1) links all elements to its corresponding levels
+#   This function 
+#   1) links all elements to its corresponding levels
 #   2) link all levels to an artificial building 
 #   3) link the artificial building to the site 
 #--------------------------------------------------------------------------#
@@ -367,18 +300,6 @@ def LinkLevelBuildingSite(g, att_list, node_namespace):
                 level_id = level_guid_dict[each]
 
                 Link2Elemts(g, bud_cat, bud_id, level_cat, level_id, "hasStorey", node_namespace, bot_ns)
-
-
-    ## 3 link building to cites
-    for one_element in att_list:
-
-        if one_element['category'] == "Site":
-
-            site_id = one_element['uniqueId']
-            site_cat = one_element['category']
-
-
-            Link2Elemts(g, site_cat, site_id, bud_cat, bud_id, "hasBuilding", node_namespace, bot_ns)
 
 def LinkElementToHost(g, att_list, node_namespace):
     # collect all elements' uniqueID
@@ -484,13 +405,13 @@ def graph_construction(node_ns, csv_file_path, ttl_file_path, exact_geometry_fol
         CreatePerNode(g, each, node_ns)
 
     # link nodes with levels, link levels to building & building to cite
-    LinkLevelBuildingSite(g, att_list, node_ns)
+    # LinkLevelBuildingSite(g, att_list, node_ns)
 
     # link some element to its host
     LinkElementToHost(g, att_list, node_ns)
 
     # link with extention layer exact geometry 
-    LinkExactGeometry(g, att_list, exact_geometry_folder_path, node_ns)
+    # LinkExactGeometry(g, att_list, exact_geometry_folder_path, node_ns)
 
     # print(g.serialize())
     g.serialize(destination=ttl_file_path) # "test.ttl"
@@ -501,6 +422,6 @@ def graph_construction(node_ns, csv_file_path, ttl_file_path, exact_geometry_fol
 
 node_ns = rdflib.Namespace('http://example.org/resources/arc/')
 csv_file_path = 'attribute_temp.csv'
-ttl_file_path = 'apt2_revit.ttl'
+ttl_file_path = 'apt2_revit_raw.ttl'
 exact_geometry_folder_path = ".\exactgeometry"
 graph_construction(node_ns, csv_file_path, ttl_file_path, exact_geometry_folder_path)

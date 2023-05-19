@@ -392,8 +392,8 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
-      "HintPath": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\zhiqi",
-      "InputValue": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\zhiqi",
+      "HintPath": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\TEST",
+      "InputValue": "C:\\Users\\Zijian Wang\\OneDrive - Technion\\Desktop\\TEST",
       "NodeType": "ExtensionNode",
       "Id": "2a8f03a50b3645da8b60872afd486d0c",
       "Inputs": [],
@@ -1641,6 +1641,26 @@
       ],
       "Replication": "Auto",
       "Description": "Convert a Geometry object such as a Solid or Surface into a Mesh. The resolution of the mesh is determined by the Dynamo render precision\n\nMesh.ByGeometry (inputGeometry: Geometry, tolerance: double = -1, maxGridLines: int = 512): Mesh"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "",
+      "Id": "67e8df9bfc4042f3abf4e194fb4c5fa0",
+      "Inputs": [],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "",
+      "Id": "565d58c80c914227b1a6488372b20d3e",
+      "Inputs": [],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
@@ -2036,8 +2056,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 151.46341197760012,
-        "Y": 325.30046245667234
+        "X": 41.769303180908082,
+        "Y": 319.6020671945065
       },
       {
         "ShowGeometry": true,
@@ -2116,8 +2136,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2740.3514794125558,
-        "Y": 607.59603316880759
+        "X": 3130.1118139840582,
+        "Y": 635.20226149561063
       },
       {
         "ShowGeometry": true,
@@ -2346,8 +2366,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2077.0283432327651,
-        "Y": 772.2598028538406
+        "X": 2025.3716627923186,
+        "Y": 557.68589948583019
       },
       {
         "ShowGeometry": true,
@@ -2466,8 +2486,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2719.3397169903656,
-        "Y": 842.24538019105
+        "X": 2603.1632248243859,
+        "Y": 1007.7570950576509
       },
       {
         "ShowGeometry": true,
@@ -2478,6 +2498,26 @@
         "Excluded": false,
         "X": 1138.595187364165,
         "Y": 1203.1415803193986
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "67e8df9bfc4042f3abf4e194fb4c5fa0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -680.0,
+        "Y": -127.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "565d58c80c914227b1a6488372b20d3e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2739.0,
+        "Y": -92.0
       }
     ],
     "Annotations": [
@@ -2491,13 +2531,13 @@
           "bc02ee4d850b4abfbdfedc7e0fe996bf"
         ],
         "Left": -1240.4688783279553,
-        "Top": 288.44733824194134,
-        "Width": 1174.7294432715571,
-        "Height": 280.56389981841255,
+        "Top": 288.24733824194135,
+        "Width": 1174.9294432715571,
+        "Height": 280.36389981841256,
         "FontSize": 36.0,
         "InitialTop": 341.44733824194134,
         "InitialHeight": 279.56389981841255,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2511,13 +2551,13 @@
           "e0872fff012e451aba3880b96e68c64f"
         ],
         "Left": -1082.7870720957796,
-        "Top": -452.12564707823554,
-        "Width": 1017.2484703076511,
-        "Height": 231.62761259537,
+        "Top": -452.52564707823558,
+        "Width": 1017.6484703076511,
+        "Height": 231.52075424271015,
         "FontSize": 36.0,
         "InitialTop": -356.12564707823554,
         "InitialHeight": 212.32075424271011,
-        "TextblockHeight": 86.0,
+        "TextblockHeight": 86.4,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2541,14 +2581,14 @@
           "4a6fb822e7454bc6af25ca918df2b5fc",
           "4dae413f5fd84d6f84867718e03e96c1"
         ],
-        "Left": 141.46341197760012,
-        "Top": -121.24183257848142,
-        "Width": 2450.1471459372751,
-        "Height": 1271.501635432322,
+        "Left": 31.769303180908082,
+        "Top": -121.44183257848142,
+        "Width": 2560.8412547339672,
+        "Height": 1055.7277320643116,
         "FontSize": 36.0,
         "InitialTop": -68.241832578481421,
-        "InitialHeight": 985.501635432322,
-        "TextblockHeight": 43.0,
+        "InitialHeight": 966.70407158193984,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2570,13 +2610,13 @@
           "ede1bd6123004d18a3606f5c646d997f"
         ],
         "Left": 148.46638811703156,
-        "Top": -752.23583981526929,
-        "Width": 2122.8204762419673,
-        "Height": 541.8447950159125,
+        "Top": -752.43583981526933,
+        "Width": 2334.4204762419677,
+        "Height": 809.64479501591245,
         "FontSize": 36.0,
         "InitialTop": -699.23583981526929,
         "InitialHeight": 524.8447950159125,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2589,13 +2629,13 @@
           "5fe161477254491ca2fb15d599f4c53f"
         ],
         "Left": 371.1843608566287,
-        "Top": 1069.3844898961734,
-        "Width": 1819.8433708892717,
-        "Height": 468.99304554628111,
+        "Top": 1069.1844898961733,
+        "Width": 1819.4433708892716,
+        "Height": 349.79304554628106,
         "FontSize": 36.0,
         "InitialTop": 1122.3844898961734,
         "InitialHeight": 292.91928504621887,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
       {
@@ -2606,13 +2646,13 @@
           "e24375254205466d84c2b8f01a727274"
         ],
         "Left": 3187.4854502512194,
-        "Top": -292.79365377691238,
-        "Width": 399.89471694646818,
-        "Height": 667.86813870929348,
+        "Top": -206.3936537769124,
+        "Width": 611.49471694646809,
+        "Height": 581.26813870929345,
         "FontSize": 36.0,
         "InitialTop": 149.20634622308762,
         "InitialHeight": 214.86813870929348,
-        "TextblockHeight": 432.0,
+        "TextblockHeight": 345.6,
         "Background": "#FFC1D676"
       },
       {
@@ -2621,19 +2661,19 @@
         "Nodes": [
           "2a8f03a50b3645da8b60872afd486d0c"
         ],
-        "Left": 2730.3514794125558,
-        "Top": 424.59603316880759,
-        "Width": 268.0,
-        "Height": 277.0,
+        "Left": 3120.1118139840582,
+        "Top": 452.40226149561062,
+        "Width": 268.80000000000018,
+        "Height": 276.2,
         "FontSize": 36.0,
-        "InitialTop": 607.59603316880759,
+        "InitialTop": 635.20226149561063,
         "InitialHeight": 145.0,
-        "TextblockHeight": 173.0,
+        "TextblockHeight": 172.8,
         "Background": "#FFFF7BAC"
       }
     ],
-    "X": 195.61556295203638,
-    "Y": 194.97588269190129,
-    "Zoom": 0.23164917953389122
+    "X": -156.42468519341355,
+    "Y": 60.708784822333655,
+    "Zoom": 0.33754223476057987
   }
 }
